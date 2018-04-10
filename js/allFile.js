@@ -2,11 +2,11 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:37 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-03-29 18:56:14
+ * @Last Modified time: 2018-04-10 15:39:11
  */
 
 
-var list=[
+var list = [
     {
         "id": 18,
         "folderName": "测试文件夹",
@@ -28,7 +28,7 @@ var list=[
                         "folderParentId": 19,
                         "folderStatus": false,
                         "child": [
-                            
+
                         ]
                     }
                 ]
@@ -56,7 +56,7 @@ var list=[
                         "folderParentId": 19,
                         "folderStatus": false,
                         "child": [
-                            
+
                         ]
                     }
                 ]
@@ -67,41 +67,50 @@ var list=[
 
 var fileList = { "folders": [{ "id": 19, "folderName": "@@@@测试文件夹", "folderStatus": false, "child": [] }], "files": [{ "id": 1, "fileName": "文件名", "folderId": 18, "fileExplain": "这是一段文件的简述", "fileStatus": false, "vip": false, "lastResizeTime": "Jan 16, 2018 12:00:00 AM" }, { "id": 16, "fileName": "aaa", "folderId": 18, "fileStatus": false, "vip": false }] };
 
-var currentFolderLevel=0;
-var currentFolder=0;   
+var currentFolderLevel = 0;
+var currentFolder = 0;
 var selectedFolderForMove;
-window.onload=function(){
+var nodeid;
+window.onload = function () {
     alert("onoload");
+    refreshfull("0");
+}
+
+
+function refreshfull(folderId) {
     getTreeSource();
     refresh();
-    refreshfileList("0");
-}    
+    refreshfileList(folderId);
+}
+
+
+
 
 /**
  * 拉取文件夹列表
  */
-function getTreeSource(){
-    
+function getTreeSource() {
+
     $.ajax({
-    type: "get",
-    url: "/managerFolderManageController/getAllFolders",
-    data: "",
-    dataType: "json",
-    async: false,
-    success: function (data) {
-        alert("loadFolderTreeSuccess");
-        list = data;
-        list=getTree(list);
-      
-    
-    },
-    error: function (data) {
-        alert("拉取文件树列表失败,调用测试数据");
-        list=getTree(list);
-        
-       
-    }
-});
+        type: "get",
+        url: "/managerFolderManageController/getAllFolders",
+        data: "",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            alert("loadFolderTreeSuccess");
+            list = data;
+            list = getTree(list);
+
+
+        },
+        error: function (data) {
+            alert("拉取文件树列表失败,调用测试数据");
+            list = getTree(list);
+
+
+        }
+    });
 }
 /**
  * 设置文件夹树所用的数据
@@ -180,8 +189,8 @@ function buildList(fileList) {
             $img.attr("src", "./images/folder.png")
             $img.attr("alt", "文件夹")
             $a = $("<a></a>");
-            $a.attr("href","javascript:void(0)" );
-            $a.attr("onclick", "refreshfileList("+fileList.folders[i].id+")");
+            $a.attr("href", "javascript:void(0)");
+            $a.attr("onclick", "refreshfileList(" + fileList.folders[i].id + ")");
             $a.text(fileList.folders[i].folderName);
             $td1 = $("<td></td>");
             $td1.attr("class", "tableRight");
@@ -251,7 +260,7 @@ function createFolder() {
         success: function (data) {
             console.log(data);
             alert(创建成功);
-
+            refreshfull(currentFolder);
         },
         error: function (data) {
             console.log(data);
@@ -286,7 +295,7 @@ function edit() {
 
 }
 
-function refreshfileList(id){
+function refreshfileList(id) {
     $.ajax({
         type: "get",
         url: "/managerFilesManageController/showAllFilesByParentId",
@@ -299,6 +308,14 @@ function refreshfileList(id){
         success: function (data) {
             console.log(data);
             alert("拉取文件夹下的数据成功");
+            var tree = $('#selectableTree');          
+    if(node.state.expanded){   
+        //处于展开状态则折叠  
+        tree.treeview('collapseNode', node.nodeId);    
+    } else {  
+        //展开  
+        tree.treeview('expandNode', node.nodeId);  
+    }  
             buildList(data);//生成列表，测试用位置 //buildList应调用位置
         },
         error: function (data) {
@@ -309,27 +326,37 @@ function refreshfileList(id){
         }
     });
 }
-            /**
- * 设置/刷新文件夹列表
- */
+/**
+* 设置/刷新文件夹列表
+*/
 function refresh() {
 
-$('#selectableTree').treeview({
-    data: list,
-    multiSelect: $('#chk-select-multi').is(':checked'),
-    onNodeSelected: function (event, node) {
-        alert(node.id);
+    $('#selectableTree').treeview({
+        data: list,
+        multiSelect: $('#chk-select-multi').is(':checked'),
+        onNodeSelected: function (event, node) {
+   
 
-        currentFolderLevel = node.folderLevel;
-        currentFolder = node.folderParentId;
-        refreshfileList(node.id);
+            currentFolderLevel = node.folderLevel;
+            currentFolder = node.folderParentId;
+            refreshfileList(node.id);
 
-        $('#selectableTree').treeview('expandNode', node);
-    },
+            if(node.state.expanded){   
+                //处于展开状态则折叠  
+                $('#selectableTree').treeview('collapseNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
+            } else {  
+                //展开  
+                // $('#selectableTree').treeview('expandNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
+                $('#selectableTree').treeview('expandNode', [ 1, { silent: false } ]);
+            }  
 
-});
-$('#selectableTree').treeview('collapseAll', { silent: true });
-  }
+            
+        }
+      
+
+    });
+    $('#selectableTree').treeview('collapseAll', { silent: true });
+}
 
 /**
  * 修改文件夹名称
@@ -349,7 +376,7 @@ function editFolder() {
         success: function (data) {
             console.log(data);
             alert(修改成功);
-
+            refreshfull(currentFolder);
         },
         error: function (data) {
             console.log(data);
@@ -367,16 +394,16 @@ function editFolder() {
 function move() {
 
     if ($("input[class='ck folder']:checked").val() != null) {
-          alert("选中文件夹");
-          $('#move').modal('show');
-         
-  
-      }
-      else {
-          alert("请选择文件夹");
-      }
-  }
-  
+        alert("选中文件夹");
+        $('#move').modal('show');
+
+
+    }
+    else {
+        alert("请选择文件夹");
+    }
+}
+
 
 
 /**
@@ -388,10 +415,10 @@ $('#TreeForMove').treeview({
     onNodeSelected: function (event, node) {
         alert(node.id);
 
-       
-        selectedFolderForMove=node.id;
-       
-    
+
+        selectedFolderForMove = node.id;
+
+
         $('#TreeForMove').treeview('expandNode', node);
     },
 
@@ -404,31 +431,32 @@ $('#TreeForMove').treeview('collapseAll', { silent: true });
  * 移动文件夹
  */
 function moveFolder() {
-    if($("input[class='ck folder']:checked").val() != null){
-    $.ajax({
-        type: "get",
-        url: "/managerFolderManageController/moveFolder",
-        contentType: 'application/x-www-form-urlencoded',
-        async: true,
-        dataType: "json",
-        data: {
-            "newParentId": selectedFolderForMove,
-            "id": $("input[class='ck folder']:checked").val()
+    if ($("input[class='ck folder']:checked").val() != null) {
+        $.ajax({
+            type: "get",
+            url: "/managerFolderManageController/moveFolder",
+            contentType: 'application/x-www-form-urlencoded',
+            async: true,
+            dataType: "json",
+            data: {
+                "newParentId": selectedFolderForMove,
+                "id": $("input[class='ck folder']:checked").val()
 
-        },
-        success: function (data) {
-            console.log(data);
-            alert("移动成功");
+            },
+            success: function (data) {
+                console.log(data);
+                alert("移动成功");
+                refreshfull(currentFolder);
 
-        },
-        error: function (data) {
-            console.log(data);
-            alert("移动失败");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("移动失败");
 
-        }
-    })
-}
-else alert("所选项目非文件夹");
+            }
+        })
+    }
+    else alert("所选项目非文件夹");
 }
 /**
  * 删除按钮
@@ -450,6 +478,7 @@ $('#delete').click(function () {
             success: function (data) {
                 console.log(data);
                 alert(该知识已被删除);
+                refreshfull(currentFolder);
 
             },
             error: function (data) {
