@@ -1,9 +1,10 @@
 /*
  * @Author: Liu PengHui 
- * @Date: 2018-03-29 18:55:37 
+ * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-10 15:39:11
+ * @Last Modified time: 2018-04-10 16:42:08
  */
+
 
 
 var list = [
@@ -73,11 +74,11 @@ var selectedFolderForMove;
 var nodeid;
 window.onload = function () {
     alert("onoload");
-    refreshfull("0");
+    fullrefresh("0");
 }
 
 
-function refreshfull(folderId) {
+function fullrefresh(folderId) {
     getTreeSource();
     refresh();
     refreshfileList(folderId);
@@ -260,7 +261,7 @@ function createFolder() {
         success: function (data) {
             console.log(data);
             alert(创建成功);
-            refreshfull(currentFolder);
+            fullrefresh(currentFolder);
         },
         error: function (data) {
             console.log(data);
@@ -294,7 +295,9 @@ function edit() {
 
 
 }
-
+/**刷新右侧文件列表
+ * 
+ */
 function refreshfileList(id) {
     $.ajax({
         type: "get",
@@ -309,13 +312,6 @@ function refreshfileList(id) {
             console.log(data);
             alert("拉取文件夹下的数据成功");
             var tree = $('#selectableTree');          
-    if(node.state.expanded){   
-        //处于展开状态则折叠  
-        tree.treeview('collapseNode', node.nodeId);    
-    } else {  
-        //展开  
-        tree.treeview('expandNode', node.nodeId);  
-    }  
             buildList(data);//生成列表，测试用位置 //buildList应调用位置
         },
         error: function (data) {
@@ -342,12 +338,12 @@ function refresh() {
             refreshfileList(node.id);
 
             if(node.state.expanded){   
-                //处于展开状态则折叠  
+                //折叠  
                 $('#selectableTree').treeview('collapseNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
             } else {  
                 //展开  
-                // $('#selectableTree').treeview('expandNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
-                $('#selectableTree').treeview('expandNode', [ 1, { silent: false } ]);
+                $('#selectableTree').treeview('expandNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
+              
             }  
 
             
@@ -376,7 +372,7 @@ function editFolder() {
         success: function (data) {
             console.log(data);
             alert(修改成功);
-            refreshfull(currentFolder);
+            fullrefresh(currentFolder);
         },
         error: function (data) {
             console.log(data);
@@ -446,7 +442,7 @@ function moveFolder() {
             success: function (data) {
                 console.log(data);
                 alert("移动成功");
-                refreshfull(currentFolder);
+                fullrefresh(currentFolder);
 
             },
             error: function (data) {
@@ -478,7 +474,7 @@ $('#delete').click(function () {
             success: function (data) {
                 console.log(data);
                 alert(该知识已被删除);
-                refreshfull(currentFolder);
+                fullrefresh(currentFolder);
 
             },
             error: function (data) {
@@ -521,3 +517,5 @@ $('#delete').click(function () {
 }
 
 );
+
+

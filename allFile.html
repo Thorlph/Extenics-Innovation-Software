@@ -39,36 +39,36 @@
     </div>
 
     <nav class="navbar navbar-inverse " role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-              aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand visible-xs" href="#">知识库</a>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <a class="navbar-brand hidden-xs " href="adminIndex.html">首页</a>
-            <ul class="nav navbar-nav navbar-right ">
-              <li>
-                <a id="first" href="addKnowledge.html">&nbsp&nbsp添加知识</a>
-              </li>
-              <li>
-                <a href="knowledgeSearch.html">&nbsp&nbsp知识查找</a>
-              </li>
-  
-  
-              <li>
-                <a href="allFile.html">&nbsp&nbsp全部文件</a>
-              </li>
-  
-            </ul>
-          </div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand visible-xs" href="#">知识库</a>
         </div>
-      </nav>
+        <div id="navbar" class="collapse navbar-collapse">
+          <a class="navbar-brand hidden-xs " href="adminIndex.html">首页</a>
+          <ul class="nav navbar-nav navbar-right ">
+            <li>
+              <a id="first" href="addKnowledge.html">&nbsp&nbsp添加知识</a>
+            </li>
+            <li>
+              <a href="knowledgeSearch.html">&nbsp&nbsp知识查找</a>
+            </li>
+
+
+            <li>
+              <a href="allFile.html">&nbsp&nbsp全部文件</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
 
   <div class="container">
@@ -85,9 +85,9 @@
           <button type="button" class="btn btn-default glyphicon glyphicon-file"> 新建文件</button>
         </a>
         <button type="button" class="btn btn-default glyphicon glyphicon-folder-open" data-toggle="modal" data-target="#myModal">
-        新建文件夹</button>
+          新建文件夹</button>
         <button type="button" class="btn btn-default glyphicon glyphicon-share-alt" onclick="move()">
-            移动文件夹</button>
+          移动文件夹</button>
         <button type="button" class="btn btn-default glyphicon glyphicon-edit" onclick="edit()"> 修改</button>
         <button type="button" class="btn btn-default glyphicon glyphicon-trash" id="delete"> 删除</button>
         <button type="button" class="btn btn-default glyphicon glyphicon-refresh" onclick="refresh()"> 刷新</button>
@@ -104,15 +104,19 @@
           <tr>
             <th>
 
-               <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
-                  </ol>
+              <ol class="breadcrumb">
+                <li>
+                  <a href="javascript:void(0)" onclick="refreshfileList(0);">Home</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)">Library</a>
+                </li>
+
+              </ol>
 
             </th>
 
-              <th>时间</th>
+            <th>时间</th>
 
           </tr>
         </thead>
@@ -186,38 +190,38 @@
     <!-- /.modal -->
   </div>
 
-<!-- 修改文件夹名modal -->
+  <!-- 修改文件夹名modal -->
   <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">修改文件夹名</h4>
-          </div>
-          <div class="modal-body">
-            <label for="newFolderName">文件夹名</label>
-            <input type="text" id="editedName">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editFolder()">修改</button>
-          </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">修改文件夹名</h4>
         </div>
-        <!-- /.modal-content -->
+        <div class="modal-body">
+          <label for="newFolderName">文件夹名</label>
+          <input type="text" id="editedName">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editFolder()">修改</button>
+        </div>
       </div>
-      <!-- /.modal -->
+      <!-- /.modal-content -->
     </div>
+    <!-- /.modal -->
+  </div>
 
-    <!-- 移动文件夹modal -->
+  <!-- 移动文件夹modal -->
   <div class="modal fade" id="move" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">移动文件夹</h4>
-          </div>
-          <div class="modal-body">
-              <div id="TreeForMove" class="tree p_b_20">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">移动文件夹</h4>
+        </div>
+        <div class="modal-body">
+          <div id="TreeForMove" class="tree p_b_20">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn" data-dismiss="modal">取消</button>
@@ -228,10 +232,10 @@
       </div>
       <!-- /.modal -->
     </div>
-  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap-treeview.js"></script>
-  <script type="text/javascript" src="js/allFile.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-treeview.js"></script>
+    <script type="text/javascript" src="js/allFile.js"></script>
 </body>
 
 </html>

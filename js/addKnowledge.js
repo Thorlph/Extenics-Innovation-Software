@@ -1,10 +1,9 @@
 /*
  * @Author: Liu PengHui 
- * @Date: 2018-03-29 18:55:03 
+ * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-03 17:11:05
+ * @Last Modified time: 2018-04-10 16:42:08
  */
-
 
 
 
@@ -112,13 +111,14 @@ console.log(editor.txt.html());
 
 		},
 		success: function (data) {
-			alert(data);
+			alert("成功:"+data);
 			console.log(data);
 			window.location.href = "addSuccess.html";
 		},
 		error: function (data) {
+			alert("失败");
 			console.log(data);
-			alert(data);
+			window.location.href = "addSuccess.html";
 		}
 	});
 });
