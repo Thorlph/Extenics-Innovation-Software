@@ -1,0 +1,46 @@
+ /**底栏**/
+  
+  
+  
+  
+ .footer {
+    width: 95%;
+    height: 50px;
+    
+    float: left;
+    margin-left: 2.5%;
+    font: 12px/50px Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+  }
+  
+  .footer a {
+    color: #f57389;
+    float: left;
+    margin-left: 15px;
+  }
+  
+  .footer a.a1 {
+    padding-left: 15px;
+    background: url(../Images/icon_tel.jpg) left center no-repeat;
+  }
+  
+  
+  .footer a.a2 {
+    padding-left: 15px;
+    background: url(../Images/icon_bird.jpg) left center no-repeat;
+  }
+  
+  .footer .span_1 {
+    width: auto;
+    height: 50px;
+    color: #666;
+    float: left;
+  }
+  .footer .span_2 {
+    width: auto;
+    height: 50px;
+    float: right;
+    margin-right: 20px;
+    font: 12px/50px Arial, Helvetica, sans-serif;
+  }
+  

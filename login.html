@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="css/footer.css" rel="stylesheet" type="text/css">
+    <link href="css/loginpage.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+
+    <div class="limit">
+        <!--limit用于使内容居中-->
+        <!--顶栏右上角-->
+        <div id="topright">
+            <a href="signIn.html">注册 Sign In</a> |
+
+            <a href="index.html">返回主页 Homepage</a>&nbsp;
+        </div>
+
+
+        <table class="headTable" cellspacing="0" width=100%>
+            <tr>
+                <td>
+                    <a href="#">
+                        <img src="images/i.png" width="100" height="100" border="0" alt="logo">
+                    </a>
+                </td>
+
+
+            </tr>
+        </table>
+
+    </div>
+
+    <div id="loginArea">
+        <div id="formArea" class="centerdiv">
+            <!--<form method="post" onsubmit="return checkForm();" action="loginsuccess.html">-->
+            <h3>登陆</h3>
+            <br/>
+            <br/>
+            <div id="loginResult"></div>
+            <br/>
+            <br/>
+
+            <div class="centerdiv">
+                用户类型
+                <label>*</label>
+                <br/>
+                <br/>
+                <input type="radio" id="usertype" name="usertype" value="0"/>管理员 &nbsp;&nbsp;&nbsp;
+                <input type="radio" id="usertype" name="usertype" value="1"/>用户
+                <br/>
+                <br/>
+            </div>
+            <div class="centerdiv">
+                <span title="只能使用英文字符和数字且不能用数字开头" id="usernameMsg">用户名
+                    <label>*</label>
+                </span>
+                <input type="text" id="username" name="username" onkeyup="checkUsername();" />
+            </div>
+            <br/>
+
+
+            <div class="centerdiv">
+                <span title="任意字符6-16位" id="passwordMsg">密码
+                    <label>*</label>
+                </span>
+                <input type="password" id="password" onkeyup="checpassword();">
+            </div>
+            <br/>
+            <div class="centerdiv">
+                <span title="验证码" id="passwordMsg">验证码
+                    <label>*</label>
+                </span>
+                <input type="text" id="validateCodeFromWeb">
+            </div>
+            <br/>
+            <div class="centerdiv">
+                <img id="validateCodeImg" src="login/validateCode" />&nbsp;&nbsp;
+                <a id="changecode" href="#">看不清？</a>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+
+
+        </div>
+        <div class="centerdiv">
+            <button type="button" id="login">登陆</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="reset" value="重置">
+        </div>
+
+
+        <!--</form>-->
+    </div>
+
+
+
+
+
+    <div class="footer" align="center">
+
+        <span class="span_1">&copy; Copyright 2017, A Online Book Store</span>&nbsp;&nbsp;
+        <a href="#">帮助 & 联系我们</a>
+        <a class="a1" href="#">RSS 订阅</a>
+        <a class="a2" href="#">我们的Twitter</a>
+        <span class="span_2">
+            <b>Published by</b>
+            <img src="images/i.png" width="50" height="50" align="absmiddle" />
+        </span>
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js">
+
+    </script>
+
+    <script type="text/javascript" src="js/login.js">
+
+    </script>
+
+</body>
+
+</html>

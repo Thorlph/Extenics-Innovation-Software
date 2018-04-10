@@ -1,0 +1,199 @@
+html {
+    font-size: 15px;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "SimSun";
+    background-color: #151416;
+    background: url("../images/loginBG.jpg");
+    color: white;
+}
+
+.limit {
+    padding: 0 200px 0 200px;
+
+}
+
+#topright {
+    text-align: right;
+}
+
+h2 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Comic Sans MS', cursive;
+    margin: 0;
+    padding-top: 20px;
+
+}
+
+h3 {
+    font-size: 40px;
+    font-family: 'Comic Sans MS', cursive;
+    text-align: center;
+    margin: 0px;
+}
+
+.upPart {
+    padding: 50px;
+    text-align: center;
+
+    background: url("../images/BG.jpg");
+
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.headTable ul li {
+    display: inline;
+    background: rgba(27, 26, 26, 0.66);
+    color: white;
+    padding: 20px;
+}
+
+.headTable ul li:hover {
+    margin-bottom: -2px;
+
+    border-bottom: 2px solid #dc3c00;
+}
+
+#topButon {
+
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+
+}
+
+#loginArea {
+
+    width: 500px;
+    height: 700px;
+    /*text-align:center;*/
+    background-color: rgba(255, 255, 255, 0.17);
+    margin: 0 auto;
+
+}
+
+#formArea {
+    padding: 15px;
+
+}
+
+#formArea span {
+    color: #FFFFFF;
+    font-size: 0.85em;
+    padding-bottom: 0.2em;
+    display: block;
+}
+
+input[type="button"] {
+
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    border: 1px solid #EEE;
+    outline-color: #FF5B36;
+    font-size: 1em;
+    padding: 0.5em;
+    background-color: rgba(255, 255, 255, 0.17);
+}
+
+input[type="password"] {
+    border: 1px solid #EEE;
+    outline-color: #FF5B36;
+    font-size: 1em;
+    padding: 0.5em;
+    background-color: rgba(255, 255, 255, 0.17);
+}
+
+.checkbox {
+    margin-bottom: 4px;
+
+    font-size: 1.1em;
+    line-height: 27px;
+    cursor: pointer;
+}
+
+.checkbox {
+    position: relative;
+    font-size: 0.85em;
+    color: #FFFFFF;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 5px;
+}
+
+.selected {
+    width: 193px;
+    height: 53px;
+}
+
+.centerdiv {
+    text-align: center;
+}
+
+.positonfix {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+button[type="button"] {
+
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+input[type="reset"] {
+
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.boxinline {
+    display: inline-block;
+}
+
+
+  
+  
