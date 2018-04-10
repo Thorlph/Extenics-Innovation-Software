@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-10 16:42:08
+ * @Last Modified time: 2018-04-10 18:08:19
  */
 
 
@@ -94,7 +94,7 @@ function getTreeSource() {
 
     $.ajax({
         type: "get",
-        url: "/managerFolderManageController/getAllFolders",
+        url: "managerFolderManageController/getAllFolders",
         data: "",
         dataType: "json",
         async: false,
@@ -249,7 +249,7 @@ function createFolder() {
 
     $.ajax({
         type: "post",
-        url: "/managerFolderManageController/addFolder",
+        url: "managerFolderManageController/addFolder",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -301,7 +301,7 @@ function edit() {
 function refreshfileList(id) {
     $.ajax({
         type: "get",
-        url: "/managerFilesManageController/showAllFilesByParentId",
+        url: "managerFilesManageController/showAllFilesByParentId",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -360,7 +360,7 @@ function refresh() {
 function editFolder() {
     $.ajax({
         type: "post",
-        url: "/managerFolderManageController/updateFolder",
+        url: "managerFolderManageController/updateFolder",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -430,7 +430,7 @@ function moveFolder() {
     if ($("input[class='ck folder']:checked").val() != null) {
         $.ajax({
             type: "get",
-            url: "/managerFolderManageController/moveFolder",
+            url: "managerFolderManageController/moveFolder",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -463,7 +463,7 @@ $('#delete').click(function () {
 
         $.ajax({
             type: "get",
-            url: "/managerFilesManageController/showAllFilesByParentId",
+            url: "managerFilesManageController/showAllFilesByParentId",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",

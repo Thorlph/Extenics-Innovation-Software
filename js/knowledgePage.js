@@ -1,15 +1,16 @@
 /*
  * @Author: Liu PengHui 
- * @Date: 2018-03-29 18:55:58 
+ * @Date: 2018-04-10 18:09:56 
  * @Last Modified by:   Liu PengHui 
- * @Last Modified time: 2018-03-29 18:55:58 
+ * @Last Modified time: 2018-04-10 18:09:56 
  */
+
 
 window.onload=function(){
 
 	$.ajax({
 		type: "get",
-		url: "/managerFilesManageController/getFileWithId",
+		url: "managerFilesManageController/getFileWithId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",

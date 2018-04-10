@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-10 16:42:08
+ * @Last Modified time: 2018-04-10 18:07:48
  */
 
 
@@ -95,7 +95,7 @@ for (var i = 0; i < type.length; i++) {
 console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
-		url: "/managerFilesManageController/addKnowledgeWithParentFolderId",
+		url: "managerFilesManageController/addKnowledgeWithParentFolderId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",
