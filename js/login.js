@@ -105,6 +105,7 @@ $("#login").click(
                             $("#validateCodeImg").attr("src", "login/validateCode?data=" + new Date() + Math.floor(Math.random() * 24));
                         }
                     } else if (data == "success") {
+                        $.session.set('account',  $('#username').val());
                         window.location.href = "adminIndex.html";//跳去官网
                     } else {
                         alert(msg);
@@ -119,7 +120,7 @@ $("#login").click(
         else if($("[name='usertype']").filter(":checked").val() == 1){
             $.ajax({
                 type: "post",
-                url: "login/adminlogin",
+                url: "login/userlogin",
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: "json",
                 async: true,
@@ -142,7 +143,8 @@ $("#login").click(
                             $("#validateCodeImg").attr("src", "login/validateCode?data=" + new Date() + Math.floor(Math.random() * 24));
                         }
                     } else if (data == "success") {
-                        window.location.href = "userIndex.html";//跳去官网
+                        $.session.set('account',  $('#username').val());
+                        window.location.href = "userpage.html";//跳去官网
                     } else {
                         alert(msg);
                     }

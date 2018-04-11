@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-07 16:44:36 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-03-23 21:42:24
+ * @Last Modified time: 2018-04-11 19:40:43
  */
 
 var testdata = {
@@ -57,7 +57,29 @@ var testdata = {
 $(document).ready(function () {
     var userId = GetQueryString("id");
     var url = "feedbackD";
+    $.ajax({
+        type: 'post',
+        url: 'user/showUser',
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: 'json',
+        async: false,
+        data: $.session.get('account'),
+        success: function (data) {
+            console.log("用户信息拉取:");
+            console.log(data);
+            alert("用户信息拉取成功");
+            $('#userName').val(data.username);
+            $('#userMail').val(data.useremail);
+            $('#userStatus').val(data.userstatus);
+         
+          
+        },
+        error: function (data) {
+            alert("用户信息拉取拉取失败,请登录");
+         
+        }
 
+    });
     $.ajax({
         type: 'get',
         url: '/extenicsKnowledgeSys/Feedback/getFeedbackList',
@@ -83,7 +105,7 @@ $(document).ready(function () {
             $('#table').html(str);
 
         }
-    })
+    });
     /**
      * 收藏夹拉取
      */
