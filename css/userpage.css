@@ -74,3 +74,30 @@
     width: 150px;
     height: 150px;
 }
+button{
+    
+    background-color: transparent;
+    border: 1px solid #000000;
+    display: inline-block;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+button:hover{
+    background-color:black;
+    border: 1px solid #000000;
+    display: inline-block;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}

@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-07 16:44:36 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-11 19:40:43
+ * @Last Modified time: 2018-04-11 21:24:59
  */
 
 var testdata = {
@@ -55,6 +55,8 @@ var testdata = {
 }
     ;
 $(document).ready(function () {
+
+    //拉取用户信息
     var userId = GetQueryString("id");
     var url = "feedbackD";
     $.ajax({
@@ -71,6 +73,7 @@ $(document).ready(function () {
             $('#userName').val(data.username);
             $('#userMail').val(data.useremail);
             $('#userStatus').val(data.userstatus);
+            $.session.set('userid', data.userid);
          
           
         },
