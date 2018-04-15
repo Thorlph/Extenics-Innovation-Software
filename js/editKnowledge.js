@@ -1,8 +1,8 @@
 /*
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
- * @Last Modified by:   Liu PengHui 
- * @Last Modified time: 2018-03-29 18:55:47 
+ * @Last Modified by: Liu PengHui
+ * @Last Modified time: 2018-04-15 23:48:58
  */
 
 
@@ -62,7 +62,7 @@ window.onload = function () {
 			$("#title").val(data.fileOtherMsg.fileName);//标题
 			$("#knowleagebelong").val();//所属知识
 			confimrID=data.fileOtherMsg.folderId;//赋予已选择的文件夹id
-			$("#").val();//关键词
+			$("#keyWord").val();//关键词
 			if (data.fileOtherMsg.fileStatus) {
 				$("input[name='optionsRadiosinline'][value=1]").attr("checked", true);
 			}

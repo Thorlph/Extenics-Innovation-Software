@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-10 18:07:48
+ * @Last Modified time: 2018-04-15 23:42:40
  */
 
 
@@ -92,6 +92,7 @@ for (var i = 0; i < type.length; i++) {
 		else result = true;
 	}
 }//执行时间有问题
+alert("提交时选择的文件id为"+confimrID);
 console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
@@ -102,7 +103,7 @@ console.log(editor.txt.html());
 		data: {
 			"keyWords": $('#keyWord').val(),
 			"fileName": $('#title').val(),
-			"folderId": selectedFolderId,
+			"folderId": confimrID,
 			"fileExplain": $('#abstract').val(),
 			"vip": result,
 			// "buildingTime": ,
@@ -118,7 +119,7 @@ console.log(editor.txt.html());
 		error: function (data) {
 			alert("失败");
 			console.log(data);
-			window.location.href = "addSuccess.html";
+		
 		}
 	});
 });
