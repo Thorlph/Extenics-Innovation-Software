@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 21:17:15
+ * @Last Modified time: 2018-04-16 21:26:48
  */
 
 
@@ -57,7 +57,7 @@ window.onload = function () {
 
 		},
 		success: function (data) {
-			alert(data);
+			alert("数据抓取成功");
 			console.log(data);
 			$("#title").val(data.fileOtherMsg.fileName);//标题
 			$("#knowleagebelong").val();//所属知识
@@ -159,7 +159,7 @@ $(".btn1").click(function () {
 
 		},
 		success: function (data) {
-			alert(data);
+			alert("修改成功");
 			console.log(data);
 			window.location.href = "addSuccess.html";
 		},
