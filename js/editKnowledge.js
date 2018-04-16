@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-15 23:48:58
+ * @Last Modified time: 2018-04-16 21:17:15
  */
 
 
@@ -48,7 +48,7 @@ window.onload = function () {
 	console.log(fileId);
 	$.ajax({
 		type: "get",
-		url: "/managerFilesManageController/addKnowledgeWithParentFolderId",
+		url: "managerFilesManageController/getFileWithId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",
@@ -143,7 +143,7 @@ $(".btn1").click(function () {
 	console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
-		url: "/managerFilesManageController/addKnowledgeWithParentFolderId",
+		url: "managerFilesManageController/updateKnowledgeWithFileId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",

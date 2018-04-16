@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-10 18:08:19
+ * @Last Modified time: 2018-04-16 21:08:15
  */
 
 
@@ -260,7 +260,7 @@ function createFolder() {
         },
         success: function (data) {
             console.log(data);
-            alert(创建成功);
+            alert("创建成功");
             fullrefresh(currentFolder);
         },
         error: function (data) {
@@ -371,7 +371,7 @@ function editFolder() {
         },
         success: function (data) {
             console.log(data);
-            alert(修改成功);
+            alert("修改成功");
             fullrefresh(currentFolder);
         },
         error: function (data) {
@@ -460,10 +460,10 @@ function moveFolder() {
 $('#delete').click(function () {
     if ($("input[class='ck file']:checked").val() != null) {
         //选择为文件
-
+        alert("选中文件,id为"+ $("input[class='ck file']:checked").val());
         $.ajax({
             type: "get",
-            url: "managerFilesManageController/showAllFilesByParentId",
+            url: "managerFolderManageController/deleteFolderById",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -473,7 +473,7 @@ $('#delete').click(function () {
             },
             success: function (data) {
                 console.log(data);
-                alert(该知识已被删除);
+                alert("该知识已被删除");
                 fullrefresh(currentFolder);
 
             },
@@ -486,9 +486,9 @@ $('#delete').click(function () {
 
     }
     else if ($("input[class='ck folder']:checked").val() != null) {
-        alert("选中文件夹");
+        alert("选中文件夹,id为"+ $("input[class='ck folder']:checked").val());
         $.ajax({
-            type: "get",
+            type: "post",
             url: "managerFolderManageController/deleteFolderById",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
@@ -498,7 +498,7 @@ $('#delete').click(function () {
             },
             success: function (data) {
 
-                alert(该文件夹已被删除);
+                alert("该文件夹已被删除");
 
             },
             error: function (data) {

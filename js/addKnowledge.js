@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-15 23:42:40
+ * @Last Modified time: 2018-04-16 21:11:32
  */
 
 
@@ -27,9 +27,29 @@ var folderId = 0;
 
 
 function getTreeData() {
-	var list = [{ "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }, { "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }]
-	//测试数据待替换
-	return list;
+	$.ajax({
+        type: "get",
+        url: "managerFolderManageController/getAllFolders",
+        data: "",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            alert("loadFolderTreeSuccess");
+            list = data;
+          return list;
+
+
+        },
+        error: function (data) {
+            alert("拉取文件树列表失败,调用测试数据");
+			var list = [{ "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }, { "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }]
+			//测试数据待替换
+			return list;
+
+
+        }
+    });
+	
 }
 
 function getTree(list) {
