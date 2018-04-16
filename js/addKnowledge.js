@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 21:11:32
+ * @Last Modified time: 2018-04-16 22:31:33
  */
 
 
@@ -23,6 +23,10 @@ var confimrID;//确认选择的文件夹id
 //文件夹id 测试用变量
 var folderId = 0;
 
+window.onload = function () {
+  
+   getTree(getTreeData());
+}
 
 
 
@@ -32,7 +36,7 @@ function getTreeData() {
         url: "managerFolderManageController/getAllFolders",
         data: "",
         dataType: "json",
-        async: false,
+        async: true,
         success: function (data) {
             alert("loadFolderTreeSuccess");
             list = data;

@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 21:08:15
+ * @Last Modified time: 2018-04-16 22:27:55
  */
 
 
@@ -84,7 +84,9 @@ function fullrefresh(folderId) {
     refreshfileList(folderId);
 }
 
-
+function refreshButton(){
+    fullrefresh(currentFolder);
+}
 
 
 /**
@@ -109,7 +111,24 @@ function getTreeSource() {
             alert("拉取文件树列表失败,调用测试数据");
             list = getTree(list);
 
+/**
+ * 设置移动文件夹的树
+ */
+$('#TreeForMove').treeview({
+    data: list,
+    multiSelect: $('#chk-select-multi').is(':checked'),
+    onNodeSelected: function (event, node) {
+        alert(node.id);
 
+
+        selectedFolderForMove = node.id;
+
+
+        $('#TreeForMove').treeview('expandNode', node);
+    },
+
+});
+$('#TreeForMove').treeview('collapseAll', { silent: true });
         }
     });
 }
@@ -187,7 +206,8 @@ function buildList(fileList) {
             $input.attr("class", "ck folder");
             $input.attr("value", fileList.folders[i].id);
             $img = $("<img>");
-            $img.attr("src", "./images/folder.png")
+            if(fileList.folders[i].folderStatus){$img.attr("src", "./images/folderDeleted.png");}
+            else $img.attr("src", "./images/folder.png");
             $img.attr("alt", "文件夹")
             $a = $("<a></a>");
             $a.attr("href", "javascript:void(0)");
@@ -218,8 +238,9 @@ function buildList(fileList) {
             $input.attr("class", "ck file");
             $input.attr("value", fileList.files[i].id);
             $img = $("<img>");
-            $img.attr("src", "./images/files.png")
-            $img.attr("alt", "文件夹")
+            if(fileList.files[i].fileStatus) $img.attr("src", "./images/filesDeleted.png") ;
+            else $img.attr("src", "./images/files.png");
+            $img.attr("alt", "文件");
             $a = $("<a></a>");
             $a.attr("href", "./editKnowledge.html?id=" + fileList.files[i].id)
             $a.text(fileList.files[i].fileName);
@@ -402,24 +423,7 @@ function move() {
 
 
 
-/**
- * 设置移动文件夹的树
- */
-$('#TreeForMove').treeview({
-    data: list,
-    multiSelect: $('#chk-select-multi').is(':checked'),
-    onNodeSelected: function (event, node) {
-        alert(node.id);
 
-
-        selectedFolderForMove = node.id;
-
-
-        $('#TreeForMove').treeview('expandNode', node);
-    },
-
-});
-$('#TreeForMove').treeview('collapseAll', { silent: true });
 
 
 
