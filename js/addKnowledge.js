@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 22:31:33
+ * @Last Modified time: 2018-04-17 15:57:44
  */
 
 
@@ -24,36 +24,39 @@ var confimrID;//确认选择的文件夹id
 var folderId = 0;
 
 window.onload = function () {
-  
-   getTree(getTreeData());
+
+	fullrefresh(0);
 }
 
+function fullrefresh(folderId) {
+	getTreeSource();
+	refresh();
+}
 
+/**
+ * 拉取文件夹列表
+ */
+function getTreeSource() {
 
-function getTreeData() {
 	$.ajax({
-        type: "get",
-        url: "managerFolderManageController/getAllFolders",
-        data: "",
-        dataType: "json",
-        async: true,
-        success: function (data) {
-            alert("loadFolderTreeSuccess");
-            list = data;
-          return list;
+		type: "get",
+		url: "managerFolderManageController/getAllFolders",
+		data: "",
+		dataType: "json",
+		async: false,
+		success: function (data) {
+			alert("loadFolderTreeSuccess");
+			list = data;
+			list = getTree(list);
 
 
-        },
-        error: function (data) {
-            alert("拉取文件树列表失败,调用测试数据");
-			var list = [{ "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }, { "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }]
-			//测试数据待替换
-			return list;
+		},
+		error: function (data) {
+			alert("拉取文件树列表失败,调用测试数据");
+			list = getTree(list);
+		}
+	});
 
-
-        }
-    });
-	
 }
 
 function getTree(list) {
@@ -65,6 +68,8 @@ function getTree(list) {
 			menu.push({
 				text: list[i].folderName,
 				id: list[i].id,
+				folderLevel: list[i].folderLevel,
+				folderParentId: list[i].folderParentId,
 				nodes: getTree(list[i].child)
 			});
 		}
@@ -83,23 +88,34 @@ function getTree(list) {
 	return menu;
 }
 
+function refresh() {
 
-$('#selectableTree').treeview({
-	data: getTree(getTreeData()),
-	multiSelect: $('#chk-select-multi').is(':checked'),
-	onNodeSelected: function (event, node) {
-		selectedFolderId = node.id;
-		selectedFolderName = node.text;
-	},
+    $('#selectableTree').treeview({
+        data: list,
+        multiSelect: $('#chk-select-multi').is(':checked'),
+        onNodeSelected: function (event, node) {
+   
 
-});
-$('#selectableTree').treeview('collapseAll', { silent: true });
+            currentFolderLevel = node.folderLevel;
+            currentFolder = node.folderParentId;
+            refreshfileList(node.id);
 
+            if(node.state.expanded){   
+                //折叠  
+                $('#selectableTree').treeview('collapseNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
+            } else {  
+                //展开  
+                $('#selectableTree').treeview('expandNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
+              
+            }  
 
+            
+        }
+      
 
-
-
-
+    });
+    $('#selectableTree').treeview('collapseAll', { silent: true });
+}
 
 
 $(".btn2").click(function () {
@@ -107,17 +123,17 @@ $(".btn2").click(function () {
 });
 $(".btn1").click(function () {
 
-// 获取知识属性
-var type = document.getElementsByName("optionsRadiosinline");
-var result;
-for (var i = 0; i < type.length; i++) {
-	if (type[i].checked) {
-		if (type[i].value == 0) result = false;
-		else result = true;
-	}
-}//执行时间有问题
-alert("提交时选择的文件id为"+confimrID);
-console.log(editor.txt.html());
+	// 获取知识属性
+	var type = document.getElementsByName("optionsRadiosinline");
+	var result;
+	for (var i = 0; i < type.length; i++) {
+		if (type[i].checked) {
+			if (type[i].value == 0) result = false;
+			else result = true;
+		}
+	}//执行时间有问题
+	alert("提交时选择的文件id为" + confimrID);
+	console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
 		url: "managerFilesManageController/addKnowledgeWithParentFolderId",
@@ -136,14 +152,14 @@ console.log(editor.txt.html());
 
 		},
 		success: function (data) {
-			alert("成功:"+data);
+			alert("成功:" + data);
 			console.log(data);
 			window.location.href = "addSuccess.html";
 		},
 		error: function (data) {
 			alert("失败");
 			console.log(data);
-		
+
 		}
 	});
 });
