@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 22:27:55
+ * @Last Modified time: 2018-04-17 20:03:33
  */
 
 
@@ -72,6 +72,7 @@ var currentFolderLevel = 0;
 var currentFolder = 0;
 var selectedFolderForMove;
 var nodeid;
+var treeformove;
 window.onload = function () {
     alert("onoload");
     fullrefresh("0");
@@ -103,13 +104,16 @@ function getTreeSource() {
         success: function (data) {
             alert("loadFolderTreeSuccess");
             list = data;
+            treeformove=getTree(list);
             list = getTree(list);
 
 
         },
         error: function (data) {
             alert("拉取文件树列表失败,调用测试数据");
+            treeformove=getTree(list);
             list = getTree(list);
+            
 
 /**
  * 设置移动文件夹的树
@@ -430,7 +434,12 @@ function move() {
 /**
  * 移动文件夹
  */
-function moveFolder() {
+
+$("#folderSelected").click(function () {
+
+	alert("确认选中的文件夹id:" + selectedFolderForMove);
+
+
     if ($("input[class='ck folder']:checked").val() != null) {
         $.ajax({
             type: "get",
@@ -457,6 +466,10 @@ function moveFolder() {
         })
     }
     else alert("所选项目非文件夹");
+});
+
+function moveFolder() {
+ 
 }
 /**
  * 删除按钮
@@ -521,5 +534,9 @@ $('#delete').click(function () {
 }
 
 );
+
+function realDelete(){
+    alert("not finish yet");
+}
 
 

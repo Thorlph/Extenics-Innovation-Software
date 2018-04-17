@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-17 15:57:44
+ * @Last Modified time: 2018-04-17 18:41:12
  */
 
 
@@ -19,6 +19,65 @@ var selectedFolderId;//选中文件夹id
 var selectedFoldeName;//选中文件名
 var confimrID;//确认选择的文件夹id
 
+
+var list = [
+	{
+		"id": 18,
+		"folderName": "测试文件夹",
+		"folderLevel": 2,
+		"folderParentId": 0,
+		"folderStatus": false,
+		"child": [
+			{
+				"id": 19,
+				"folderName": "测试文件夹",
+				"folderLevel": 3,
+				"folderParentId": 18,
+				"folderStatus": false,
+				"child": [
+					{
+						"id": 41,
+						"folderName": "测试文件夹",
+						"folderLevel": 4,
+						"folderParentId": 19,
+						"folderStatus": false,
+						"child": [
+
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": 18,
+		"folderName": "测试文件夹",
+		"folderLevel": 2,
+		"folderParentId": 0,
+		"folderStatus": false,
+		"child": [
+			{
+				"id": 19,
+				"folderName": "测试文件夹",
+				"folderLevel": 3,
+				"folderParentId": 18,
+				"folderStatus": false,
+				"child": [
+					{
+						"id": 41,
+						"folderName": "测试文件夹",
+						"folderLevel": 4,
+						"folderParentId": 19,
+						"folderStatus": false,
+						"child": [
+
+						]
+					}
+				]
+			}
+		]
+	}
+];
 
 //文件夹id 测试用变量
 var folderId = 0;
@@ -90,31 +149,33 @@ function getTree(list) {
 
 function refresh() {
 
-    $('#selectableTree').treeview({
-        data: list,
-        multiSelect: $('#chk-select-multi').is(':checked'),
-        onNodeSelected: function (event, node) {
-   
+	$('#selectableTree').treeview({
+		data: list,
+		multiSelect: $('#chk-select-multi').is(':checked'),
+		onNodeSelected: function (event, node) {
+			alert("选择的文件夹id为" + node.id)
+			console.log(node);
+			selectedFoldeName = node.text;
+			selectedFolderId = node.id;
+			alert("文件名"+selectedFoldeName);
+			alert(selectedFolderId);
 
-            currentFolderLevel = node.folderLevel;
-            currentFolder = node.folderParentId;
-            refreshfileList(node.id);
 
-            if(node.state.expanded){   
-                //折叠  
-                $('#selectableTree').treeview('collapseNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
-            } else {  
-                //展开  
-                $('#selectableTree').treeview('expandNode', [ node.nodeId, { silent: true, ignoreChildren: true } ]);
-              
-            }  
+			if (node.state.expanded) {
+				//折叠  
+				$('#selectableTree').treeview('collapseNode', [node.nodeId, { silent: true, ignoreChildren: true }]);
+			} else {
+				//展开  
+				$('#selectableTree').treeview('expandNode', [node.nodeId, { silent: true, ignoreChildren: true }]);
 
-            
-        }
-      
+			}
 
-    });
-    $('#selectableTree').treeview('collapseAll', { silent: true });
+
+		}
+
+
+	});
+	$('#selectableTree').treeview('collapseAll', { silent: true });
 }
 
 
@@ -164,17 +225,13 @@ $(".btn1").click(function () {
 	});
 });
 
+$("#folderSelected").click(function () {
 
+	alert("确认选中的文件夹id:" + selectedFolderId);
 
-function confirm() {
-	alert(selectedFolderId);
-	var fff = document.getElementById("knowleagebelong")
-	// fff.value = selectedFolderName;
-	$("#knowleagebelong").val(selectedFolderName);
+	$("#knowleagebelong").val(selectedFoldeName);
 	confimrID = selectedFolderId;
-	// 
-
-};
+});
 
 
 

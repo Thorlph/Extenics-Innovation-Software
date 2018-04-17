@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-16 23:11:13
+ * @Last Modified time: 2018-04-17 19:43:53
  */
 
 
@@ -12,6 +12,64 @@ var editor = new E('#editor');
 editor.customConfig.zIndex = 100;
 editor.create();
 
+var list = [
+	{
+		"id": 18,
+		"folderName": "测试文件夹",
+		"folderLevel": 2,
+		"folderParentId": 0,
+		"folderStatus": false,
+		"child": [
+			{
+				"id": 19,
+				"folderName": "测试文件夹",
+				"folderLevel": 3,
+				"folderParentId": 18,
+				"folderStatus": false,
+				"child": [
+					{
+						"id": 41,
+						"folderName": "测试文件夹",
+						"folderLevel": 4,
+						"folderParentId": 19,
+						"folderStatus": false,
+						"child": [
+
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": 18,
+		"folderName": "测试文件夹",
+		"folderLevel": 2,
+		"folderParentId": 0,
+		"folderStatus": false,
+		"child": [
+			{
+				"id": 19,
+				"folderName": "测试文件夹",
+				"folderLevel": 3,
+				"folderParentId": 18,
+				"folderStatus": false,
+				"child": [
+					{
+						"id": 41,
+						"folderName": "测试文件夹",
+						"folderLevel": 4,
+						"folderParentId": 19,
+						"folderStatus": false,
+						"child": [
+
+						]
+					}
+				]
+			}
+		]
+	}
+];
 
 
 var selectedFolderId;//选中文件夹id
@@ -25,12 +83,96 @@ var fileId;
 
 
 
-function getTreeData() {
-	var list = [{ "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }, { "id": 18, "folderName": "测试文件夹", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }] }]
-	//测试数据待替换
-	return list;
+function fullrefresh(folderId) {
+	getTreeSource();
+	refresh();
 }
 
+/**
+ * 拉取文件夹列表
+ */
+function getTreeSource() {
+
+	$.ajax({
+		type: "get",
+		url: "managerFolderManageController/getAllFolders",
+		data: "",
+		dataType: "json",
+		async: false,
+		success: function (data) {
+			alert("loadFolderTreeSuccess");
+			list = data;
+			list = getTree(list);
+
+
+		},
+		error: function (data) {
+			alert("拉取文件树列表失败,调用测试数据");
+			list = getTree(list);
+		}
+	});
+
+}
+
+function getTree(list) {
+	// Some logic to retrieve, or generate tree structure
+	var menu = new Array();//要生成的菜单数组
+	for (var i = 0; i < list.length; i = i + 1) {
+		console.log(list[i]);
+		if (list[i].child.length != 0) {
+			menu.push({
+				text: list[i].folderName,
+				id: list[i].id,
+				folderLevel: list[i].folderLevel,
+				folderParentId: list[i].folderParentId,
+				nodes: getTree(list[i].child)
+			});
+		}
+		else menu.push({
+			text: list[i].folderName,
+			id: list[i].id,
+			state: {
+				expanded: false
+			}
+		});
+
+
+
+	}
+
+	return menu;
+}
+
+function refresh() {
+
+	$('#selectableTree').treeview({
+		data: list,
+		multiSelect: $('#chk-select-multi').is(':checked'),
+		onNodeSelected: function (event, node) {
+			alert("选择的文件夹id为" + node.id)
+			console.log(node);
+			selectedFoldeName = node.text;
+			selectedFolderId = node.id;
+			alert("文件名"+selectedFoldeName);
+			alert(selectedFolderId);
+
+
+			if (node.state.expanded) {
+				//折叠  
+				$('#selectableTree').treeview('collapseNode', [node.nodeId, { silent: true, ignoreChildren: true }]);
+			} else {
+				//展开  
+				$('#selectableTree').treeview('expandNode', [node.nodeId, { silent: true, ignoreChildren: true }]);
+
+			}
+
+
+		}
+
+
+	});
+	$('#selectableTree').treeview('collapseAll', { silent: true });
+}
 /**
  * url参数获取函数
  * @param name 字段参数
@@ -44,7 +186,7 @@ function GetQueryString(name) {
 }
 //页面载入
 window.onload = function () {
-	getTree(getTreeData());
+	fullrefresh(0);
 	fileId = GetQueryString("id");
 	console.log(fileId);
 	$.ajax({
@@ -79,51 +221,14 @@ window.onload = function () {
 		},
 		error: function (data) {
 			console.log(data);
-			alert("erro");
+			alert("拉取知识信息失败");
 		}
 	});
 }
 
 
 
-function getTree(list) {
-	// Some logic to retrieve, or generate tree structure
-	var menu = new Array();//要生成的菜单数组
-	for (var i = 0; i < list.length; i = i + 1) {
-		console.log(list[i]);
-		if (list[i].child.length != 0) {
-			menu.push({
-				text: list[i].folderName,
-				id: list[i].id,
-				nodes: getTree(list[i].child)
-			});
-		}
-		else menu.push({
-			text: list[i].folderName,
-			id: list[i].id,
-			state: {
-				expanded: false
-			}
-		});
 
-
-
-	}
-
-	return menu;
-}
-
-
-$('#selectableTree').treeview({
-	data: getTree(getTreeData()),
-	multiSelect: $('#chk-select-multi').is(':checked'),
-	onNodeSelected: function (event, node) {
-		selectedFolderId = node.id;
-		selectedFolderName = node.text;
-	},
-
-});
-$('#selectableTree').treeview('collapseAll', { silent: true });
 
 
 
@@ -177,17 +282,16 @@ $(".btn1").click(function () {
 
 
 
-function confirm() {
-	alert(selectedFolderId);
-	var fff = document.getElementById("knowleagebelong")
-	// fff.value = selectedFolderName;
-	$("#knowleagebelong").val(selectedFolderName);
+
+
+
+$("#folderSelected").click(function () {
+
+	alert("确认选中的文件夹id:" + selectedFolderId);
+
+	$("#knowleagebelong").val(selectedFoldeName);
 	confimrID = selectedFolderId;
-	// 
-
-};
-
-
+});
 
 
 
