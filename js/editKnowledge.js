@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-17 19:43:53
+ * @Last Modified time: 2018-04-18 20:58:48
  */
 
 
@@ -153,7 +153,7 @@ function refresh() {
 			console.log(node);
 			selectedFoldeName = node.text;
 			selectedFolderId = node.id;
-			alert("文件名"+selectedFoldeName);
+			alert("文件名" + selectedFoldeName);
 			alert(selectedFolderId);
 
 
@@ -204,18 +204,18 @@ window.onload = function () {
 			console.log(data);
 			$("#title").val(data.fileOtherMsg.fileName);//标题
 			$("#knowleagebelong").val(data.fileOtherMsg.folderName);//所属知识
-			confimrID=data.fileOtherMsg.folderId;//赋予已选择的文件夹id
-			var keyWord=data.fileOtherMsg.keyWords[0];
-			for(var i=1;i<data.fileOtherMsg.keyWords.length;i=i+1){
-				keyWord=","+data.fileOtherMsg.keyWords[i];
+			confimrID = data.fileOtherMsg.folderId;//赋予已选择的文件夹id
+			var keyWord = data.fileOtherMsg.keyWords[0];
+			for (var i = 1; i < data.fileOtherMsg.keyWords.length; i = i + 1) {
+				keyWord = keyWord+"," + data.fileOtherMsg.keyWords[i];
 			}
 			$("#keyWord").val(keyWord);//关键词
 			if (data.fileOtherMsg.vip) {
 				$("input[name='optionsRadiosinline'][value=1]").attr("checked", true);
 			}
-			else { 
+			else {
 				$("input[name='optionsRadiosinline'][value=0]").attr("checked", true);
-			 }
+			}
 			$("#abstract").val(data.fileOtherMsg.fileExplain);//知识简介
 			editor.txt.html(data.fileTextMsg);//内容
 		},
@@ -265,7 +265,7 @@ $(".btn1").click(function () {
 			"vip": result,
 			// "buildingTime": ,
 			"file": editor.txt.html(),
-
+			"id": fileId
 
 		},
 		success: function (data) {

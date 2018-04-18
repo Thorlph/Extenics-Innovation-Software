@@ -2,80 +2,24 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-17 20:03:33
+ * @Last Modified time: 2018-04-18 20:45:05
  */
 
 
 
-var list = [
-    {
-        "id": 18,
-        "folderName": "测试文件夹",
-        "folderLevel": 2,
-        "folderParentId": 0,
-        "folderStatus": false,
-        "child": [
-            {
-                "id": 19,
-                "folderName": "测试文件夹",
-                "folderLevel": 3,
-                "folderParentId": 18,
-                "folderStatus": false,
-                "child": [
-                    {
-                        "id": 41,
-                        "folderName": "测试文件夹",
-                        "folderLevel": 4,
-                        "folderParentId": 19,
-                        "folderStatus": false,
-                        "child": [
-
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": 18,
-        "folderName": "测试文件夹",
-        "folderLevel": 2,
-        "folderParentId": 0,
-        "folderStatus": false,
-        "child": [
-            {
-                "id": 19,
-                "folderName": "测试文件夹",
-                "folderLevel": 3,
-                "folderParentId": 18,
-                "folderStatus": false,
-                "child": [
-                    {
-                        "id": 41,
-                        "folderName": "测试文件夹",
-                        "folderLevel": 4,
-                        "folderParentId": 19,
-                        "folderStatus": false,
-                        "child": [
-
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-];
+var list = [{"id":18,"folderName":"testtttt","folderLevel":2,"folderParentId":0,"folderStatus":false,"child":[{"id":19,"folderName":"@@@@测试文件夹","folderLevel":3,"folderParentId":18,"folderStatus":false,"child":[{"id":41,"folderName":"@@@@测试文件夹","folderLevel":4,"folderParentId":19,"folderStatus":false,"child":[]}]},{"id":64,"folderName":"ccc","folderLevel":4,"folderParentId":18,"folderStatus":false,"child":[]},{"id":67,"folderName":"xxx","folderLevel":4,"folderParentId":18,"folderStatus":false,"child":[]},{"id":68,"folderName":"x123","folderLevel":4,"folderParentId":18,"folderStatus":false,"child":[]},{"id":69,"folderName":"x1234","folderLevel":5,"folderParentId":18,"folderStatus":false,"child":[]}]},{"id":43,"folderName":"123","folderLevel":1,"folderParentId":0,"folderStatus":true,"child":[]},{"id":44,"folderName":"456777777","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":45,"folderName":"456zxasfdfasdsqdqweqwe","folderLevel":1,"folderParentId":0,"folderStatus":true,"child":[]},{"id":46,"folderName":"abcdefg","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":47,"folderName":"66666","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":48,"folderName":"444444","folderLevel":3,"folderParentId":0,"folderStatus":false,"child":[]},{"id":49,"folderName":"677777","folderLevel":3,"folderParentId":0,"folderStatus":true,"child":[]},{"id":50,"folderName":"4444","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":51,"folderName":"444","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":52,"folderName":"testtt","folderLevel":1,"folderParentId":0,"folderStatus":false,"child":[]},{"id":53,"folderName":"aaaa","folderLevel":1,"folderParentId":0,"folderStatus":true,"child":[]},{"id":63,"folderName":"ccc","folderLevel":3,"folderParentId":0,"folderStatus":false,"child":[]},{"id":65,"folderName":"ccc2","folderLevel":2,"folderParentId":0,"folderStatus":false,"child":[]},{"id":66,"folderName":"ccc2","folderLevel":2,"folderParentId":0,"folderStatus":true,"child":[]}];
 
 var fileList = { "folders": [{ "id": 19, "folderName": "@@@@测试文件夹", "folderStatus": false, "child": [] }], "files": [{ "id": 1, "fileName": "文件名", "folderId": 18, "fileExplain": "这是一段文件的简述", "fileStatus": false, "vip": false, "lastResizeTime": "Jan 16, 2018 12:00:00 AM" }, { "id": 16, "fileName": "aaa", "folderId": 18, "fileStatus": false, "vip": false }] };
 
-var currentFolderLevel = 0;
-var currentFolder = 0;
+var currentFolderLevel = 1;
+var currentFolder = 1;
+var currentFolderName="根目录";
 var selectedFolderForMove;
 var nodeid;
 var treeformove;
 window.onload = function () {
     alert("onoload");
-    fullrefresh("0");
+    fullrefresh("1");
 }
 
 
@@ -119,7 +63,7 @@ function getTreeSource() {
  * 设置移动文件夹的树
  */
 $('#TreeForMove').treeview({
-    data: list,
+    data: treeformove,
     multiSelect: $('#chk-select-multi').is(':checked'),
     onNodeSelected: function (event, node) {
         alert(node.id);
@@ -157,6 +101,8 @@ function getTree(list) {
         else menu.push({
             text: list[i].folderName,
             id: list[i].id,
+            folderLevel: list[i].folderLevel,
+            folderParentId: list[i].folderParentId,
             state: {
                 expanded: false
             }
@@ -165,6 +111,8 @@ function getTree(list) {
 
 
     }
+    console.log("菜单格式");
+    console.log(menu);
 
     return menu;
 }
@@ -271,7 +219,7 @@ function buildList(fileList) {
  * 
  */
 function createFolder() {
-
+    var tmp=currentFolderLevel + 1
     $.ajax({
         type: "post",
         url: "managerFolderManageController/addFolder",
@@ -280,7 +228,7 @@ function createFolder() {
         dataType: "json",
         data: {
             "folderName": $('#newFolderName').val(),
-            "folderLevel": currentFolderLevel + 1,
+            "folderLevel": tmp,
             "folderParentId": currentFolder
         },
         success: function (data) {
@@ -331,7 +279,8 @@ function refreshfileList(id) {
         async: true,
         dataType: "json",
         data: {
-            "id": id
+            "id": id,
+            "tempPara": Math.random()
         },
         success: function (data) {
             console.log(data);
@@ -359,7 +308,8 @@ function refresh() {
    
 
             currentFolderLevel = node.folderLevel;
-            currentFolder = node.folderParentId;
+            currentFolder =node.id;
+            currentFolderName=node.text;
             refreshfileList(node.id);
 
             if(node.state.expanded){   
@@ -516,7 +466,7 @@ $('#delete').click(function () {
             success: function (data) {
 
                 alert("该文件夹已被删除");
-
+                fullrefresh(currentFolder);
             },
             error: function (data) {
                 console.log(data);
@@ -540,3 +490,7 @@ function realDelete(){
 }
 
 
+$("#newKnowledge").click(function () {
+    window.location.href = "addKnowledge.html"+"?currentFolder="+currentFolder+"&currentFolderName="+currentFolderName;
+
+});

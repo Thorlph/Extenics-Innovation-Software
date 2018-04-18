@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-17 18:41:12
+ * @Last Modified time: 2018-04-18 20:47:56
  */
 
 
@@ -79,12 +79,40 @@ var list = [
 	}
 ];
 
+/**
+ * url参数获取函数
+ * @param name 字段参数
+ * @returns {null}
+ * @constructor
+ */
+function getParameterByName(paramName) {
+	var args = new Object();
+	var argsStr = location.search;  //获取URL参数字符串
+	if (argsStr.length > 0) {
+		argsStr = argsStr.substring(1);
+		var nameValueArr = argsStr.split("&");  //多参数
+		for (var i = 0; i < nameValueArr.length; i++) {
+			var pos = nameValueArr[i].indexOf('=');
+			if (pos == -1) continue; //如果没有找到就跳过
+			var argName = nameValueArr[i].substring(0, pos); //提取name
+			var argVal = nameValueArr[i].substring(pos + 1); //提取value
+			args[argName] = unescape(argVal);
+		}
+		return args[paramName];
+	}
+	}
+
+
+
 //文件夹id 测试用变量
-var folderId = 0;
+var folderId = 1;
 
 window.onload = function () {
 
 	fullrefresh(0);
+	$("#knowleagebelong").val(getParameterByName("currentFolderName"));
+	confimrID=getParameterByName("currentFolder");
+
 }
 
 function fullrefresh(folderId) {
