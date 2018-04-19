@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-18 20:47:56
+ * @Last Modified time: 2018-04-18 21:18:18
  */
 
 
@@ -87,7 +87,7 @@ var list = [
  */
 function getParameterByName(paramName) {
 	var args = new Object();
-	var argsStr = location.search;  //获取URL参数字符串
+	var argsStr = decodeURI(location.search);  //获取URL参数字符串
 	if (argsStr.length > 0) {
 		argsStr = argsStr.substring(1);
 		var nameValueArr = argsStr.split("&");  //多参数
