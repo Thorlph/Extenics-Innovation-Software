@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-07 16:44:36 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-25 22:10:44
+ * @Last Modified time: 2018-04-25 22:34:03
  */
 
 var testdata = {
@@ -59,13 +59,14 @@ $(document).ready(function () {
     //拉取用户信息
     var userId = GetQueryString("id");
     var url = "feedbackD";
+    var account=$.session.get('account');
     $.ajax({
         type: 'post',
         url: 'user/showUser',
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         async: false,
-        data: $.session.get('account'),
+        data: account,
         success: function (data) {
             console.log("用户信息拉取:");
             console.log(data);

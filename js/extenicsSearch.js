@@ -1,6 +1,9 @@
 var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 var jumpTarget = "knowledgePage.html?id=";
 $('#searchButton').click(function () {
+
+    $("#searchButton").attr("disabled", true);
+    
     var url = target + "managerFilesManageController/searchKnowledge";
     console.log("click search button" + $("#searchInput").val());
     $('#resultHolder').html("");
@@ -42,14 +45,21 @@ $('#searchButton').click(function () {
                     $div.append($h6b);
                 };
                 $("#resultHolder").append($ul);
+                
+
             }
             else {
                 $("#resultHolder").html("无结果");
+                
             }
+            $("#searchButton").attr("disabled", false);
+           
         },
         error: function (data) {
             console.log(data);
             alert("错误");
+            $("#searchButton").attr("disabled", false);
+           
 
         }
     })
