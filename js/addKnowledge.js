@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-18 21:18:18
+ * @Last Modified time: 2018-04-25 22:04:37
  */
 
 
@@ -18,7 +18,7 @@ editor.create();
 var selectedFolderId;//选中文件夹id
 var selectedFoldeName;//选中文件名
 var confimrID;//确认选择的文件夹id
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 
 var list = [
 	{
@@ -127,7 +127,7 @@ function getTreeSource() {
 
 	$.ajax({
 		type: "get",
-		url: "managerFolderManageController/getAllFolders",
+		url:target + "managerFolderManageController/getAllFolders",
 		data: "",
 		dataType: "json",
 		async: false,
@@ -225,7 +225,7 @@ $(".btn1").click(function () {
 	console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
-		url: "managerFilesManageController/addKnowledgeWithParentFolderId",
+		url:target + "managerFilesManageController/addKnowledgeWithParentFolderId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",

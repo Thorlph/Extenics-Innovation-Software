@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-07 16:44:36 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-11 21:24:59
+ * @Last Modified time: 2018-04-25 22:10:44
  */
 
 var testdata = {
@@ -52,8 +52,8 @@ var testdata = {
             "favoriteFileName": "ASA"
         }
     ]
-}
-    ;
+};
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 $(document).ready(function () {
 
     //拉取用户信息
@@ -85,7 +85,7 @@ $(document).ready(function () {
     });
     $.ajax({
         type: 'get',
-        url: '/extenicsKnowledgeSys/Feedback/getFeedbackList',
+        url:target +  '/extenicsKnowledgeSys/Feedback/getFeedbackList',
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         async: false,
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'get',
-        url: '/extenicsKnowledgeSys/FavoriteFile/getFavoriteFile',
+        url:target +  '/extenicsKnowledgeSys/FavoriteFile/getFavoriteFile',
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         async: false,

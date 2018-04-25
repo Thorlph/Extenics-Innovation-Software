@@ -1,6 +1,7 @@
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 $('#resetPassword').click(function(){
     $.ajax({
-        url:"user/resetPassword",
+        url:target + "user/resetPassword",
         method:"post",
         dataType:"json",
         data:{

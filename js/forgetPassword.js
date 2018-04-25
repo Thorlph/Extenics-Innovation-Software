@@ -1,8 +1,9 @@
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 $('#getVali').click(function(){
 
 
     $.ajax({
-        url:"user/sendPhoneVerCode",
+        url:target + "user/sendPhoneVerCode",
         method:"post",
         dataType:"json",
         async: true,
@@ -24,7 +25,7 @@ $('#getVali').click(function(){
 });
 function checkVali(){
     $.ajax({
-        url:"user/verCode",
+        url:target + "user/verCode",
         method:"post",
         dataType:"json",
         async: true,
@@ -45,7 +46,7 @@ function checkVali(){
 $('#resetPassword').click(function(){
 
     $.ajax({
-        url:"user/resetPasswordByPhone",
+        url:target + "user/resetPasswordByPhone",
         method:"post",
         dataType:"json",
         async: true,

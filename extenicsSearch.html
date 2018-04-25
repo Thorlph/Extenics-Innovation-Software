@@ -23,78 +23,84 @@
         <small class="hidden-xs">&nbsp知识库</small>
         <small>
           <ul class="nav navbar-nav navbar-right denglu hidden-xs">
-            <li><a href="signUp.html"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
-            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
+            <li>
+              <a href="signUp.html">
+                <span class="glyphicon glyphicon-user"></span> 注册</a>
+            </li>
+            <li>
+              <a href="login.html">
+                <span class="glyphicon glyphicon-log-in"></span> 登录</a>
+            </li>
           </ul>
         </small>
       </h1>
     </div>
     <nav class="navbar navbar-inverse " role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand visible-xs" href="#">知识库</a>
-            </div>
-            
-            <div id="navbar" class="collapse navbar-collapse">
-                <a id="first" class="navbar-brand hidden-xs " href="userIndex.html">首页</a>
-                <ul class="nav navbar-nav navbar-right ">
-                    <li class="dropdown">
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            &nbsp&nbsp可拓学
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu" style="min-width: 106px;">
-                            <li>
-                                <a href="extenics.html">可拓学</a>
-                            </li>
-                            <li>
-                                <a href="extenicsSearch.html">可拓学知识搜索</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            &nbsp&nbsp专业知识
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu" style="min-width: 106px;">
-                            <li>
-                                <a href="oceanKnowledgeBase.html">海洋专业知识</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="userpage.html">&nbsp&nbsp个人中心</a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            &nbsp&nbsp帮助反馈
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" style="min-width: 104px;">
-                            <li>
-                                <a href="#">常用问题</a>
-                            </li>
-                            <li>
-                                <a href="#">用户反馈</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand visible-xs" href="#">知识库</a>
         </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+          <a id="first" class="navbar-brand hidden-xs " href="userIndex.html">首页</a>
+          <ul class="nav navbar-nav navbar-right ">
+            <li class="dropdown">
+
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                &nbsp&nbsp可拓学
+                <b class="caret"></b>
+              </a>
+
+              <ul class="dropdown-menu" style="min-width: 106px;">
+                <li>
+                  <a href="extenics.html">可拓学</a>
+                </li>
+                <li>
+                  <a href="extenicsSearch.html">可拓学知识搜索</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                &nbsp&nbsp专业知识
+                <b class="caret"></b>
+              </a>
+
+              <ul class="dropdown-menu" style="min-width: 106px;">
+                <li>
+                  <a href="oceanKnowledgeBase.html">海洋专业知识</a>
+                </li>
+
+              </ul>
+            </li>
+            <li>
+              <a href="userpage.html">&nbsp&nbsp个人中心</a>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                &nbsp&nbsp帮助反馈
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" style="min-width: 104px;">
+                <li>
+                  <a href="#">常用问题</a>
+                </li>
+                <li>
+                  <a href="#">用户反馈</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
 
@@ -104,16 +110,15 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <input type="text" name="" placeholder="search">
-          <a href="gjcss.html">
-            <span class="glyphicon glyphicon-search"></span>
-          </a>
-          <a href="jm2.html">
-            <span class="glyphicon glyphicon-refresh"></span>
-          </a>
+          <input type="text" name="" placeholder="search" id="searchInput">
+
+          <span class="glyphicon glyphicon-search" id="searchButton"></span>
+
+
         </h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" id="resultHolder">
+       
         <div class="row">
           <div class="col-md-3">
             <div class="panel panel-default">
@@ -126,7 +131,7 @@
               <div class="panel-body">
                 <p> &nbsp;&nbsp;&nbsp;&nbsp;可拓学（早期称物元分析）是由我国学者蔡文研究员在1983年创立的一门新学科。它以不相容问题为研究中心，去寻求事物矛盾的内在机制。建立物元模型，通过各种变换去寻求事物的解是物元分析解决不相容问题的一般方法。
                   可拓学的逻辑细胞为物元，表示为： R=(N, c, v)，N为事物的名称，c为特征，v为量值。</p>
-                 </div>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
@@ -140,7 +145,7 @@
               <div class="panel-body">
                 &nbsp;&nbsp;&nbsp;&nbsp;拓展分析方法在处理矛盾问题的过程中，要把事物看成可以拓展的。解决矛盾问题，就是要根据事物的可拓性，变换问题的目标或条件，使目标得以实现。为使解决矛盾问题的过程形式化，我们用基元作为描述物、事和关系的形式化工具，研究了表达事物拓展规律的拓展分析方法。该方法为人们提供了解决矛盾问题的各种可能路径，可以使人们摆脱习惯领域的束缚，更是利用计算机处理矛盾问题、提高机器智能的重要方法。
                 共轭分析方法对物的结构的研究，有助于我们利用物的各个部分及各部分间的相互关系去解决矛盾问题。物具有物质性、系统性、动态性和对立性，统称为物的共轭性。根据物的共轭性，利用物元和关系元作为形式化工具，对物的虚部与实部、软部与硬部、潜部与显部、负部与正部进行的形式化定性分析方法，称为共轭分析方法。通过对物的各共轭部及其相互关系和相互转化的分析，可以得到解决矛盾问题的多种策略。共轭分析方法为人们全面分析物的
-                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-3">
@@ -168,7 +173,7 @@
               </div>
               <div class="panel-body">
                 &nbsp;&nbsp;&nbsp;&nbsp;优度评价方法是综合多种衡量条件对某一对象、方案、策略等的优劣程度进行综合评价的实用方法。关于一个对象的评价往往不能只考虑有利的一面，还要考虑不利的一面。例如某企业生产某产品，虽然可以盈利很多，但废气对环境的污染十分严重，另一个产品虽然盈利没那么多，但无公害。对应该生产何种产品，必须考虑利弊双方，进行综合评价，最后才能得到合适的筛选方案。此外，在评价时，往往要考虑到动态性和可变性，对潜在的利弊进行考虑。优度评价方法恰恰具备了这方面的优点，它用关联函数来计算各衡量条件符合要求的程度。由于关联函数的值可正可负，因此这样建立的优度可以反映一个对象利弊的程度，使得评价更符合实际。
-                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -200,8 +205,9 @@
 
 
 
-  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/extenicsSearch.js"></script>
 
 </body>
 

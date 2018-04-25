@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:31 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-18 23:36:18
+ * @Last Modified time: 2018-04-25 22:05:08
  */
 
 
@@ -10,7 +10,7 @@
 var list = [{ "id": 18, "folderName": "testtttt", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [{ "id": 19, "folderName": "@@@@测试文件夹", "folderLevel": 3, "folderParentId": 18, "folderStatus": false, "child": [{ "id": 41, "folderName": "@@@@测试文件夹", "folderLevel": 4, "folderParentId": 19, "folderStatus": false, "child": [] }] }, { "id": 64, "folderName": "ccc", "folderLevel": 4, "folderParentId": 18, "folderStatus": false, "child": [] }, { "id": 67, "folderName": "xxx", "folderLevel": 4, "folderParentId": 18, "folderStatus": false, "child": [] }, { "id": 68, "folderName": "x123", "folderLevel": 4, "folderParentId": 18, "folderStatus": false, "child": [] }, { "id": 69, "folderName": "x1234", "folderLevel": 5, "folderParentId": 18, "folderStatus": false, "child": [] }] }, { "id": 43, "folderName": "123", "folderLevel": 1, "folderParentId": 0, "folderStatus": true, "child": [] }, { "id": 44, "folderName": "456777777", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 45, "folderName": "456zxasfdfasdsqdqweqwe", "folderLevel": 1, "folderParentId": 0, "folderStatus": true, "child": [] }, { "id": 46, "folderName": "abcdefg", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 47, "folderName": "66666", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 48, "folderName": "444444", "folderLevel": 3, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 49, "folderName": "677777", "folderLevel": 3, "folderParentId": 0, "folderStatus": true, "child": [] }, { "id": 50, "folderName": "4444", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 51, "folderName": "444", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 52, "folderName": "testtt", "folderLevel": 1, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 53, "folderName": "aaaa", "folderLevel": 1, "folderParentId": 0, "folderStatus": true, "child": [] }, { "id": 63, "folderName": "ccc", "folderLevel": 3, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 65, "folderName": "ccc2", "folderLevel": 2, "folderParentId": 0, "folderStatus": false, "child": [] }, { "id": 66, "folderName": "ccc2", "folderLevel": 2, "folderParentId": 0, "folderStatus": true, "child": [] }];
 
 var fileList = { "folders": [{ "id": 19, "folderName": "@@@@测试文件夹", "folderStatus": false, "child": [] }], "files": [{ "id": 1, "fileName": "文件名", "folderId": 18, "fileExplain": "这是一段文件的简述", "fileStatus": false, "vip": false, "lastResizeTime": "Jan 16, 2018 12:00:00 AM" }, { "id": 16, "fileName": "aaa", "folderId": 18, "fileStatus": false, "vip": false }] };
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 var currentFolderLevel = 1;
 var currentFolder = 1;
 var currentFolderName = "根目录";
@@ -41,7 +41,7 @@ function getTreeSource() {
 
     $.ajax({
         type: "get",
-        url: "managerFolderManageController/getAllFolders",
+        url:target + "managerFolderManageController/getAllFolders",
         data: "",
         dataType: "json",
         async: false,
@@ -203,7 +203,7 @@ function createFolder() {
     var tmp = currentFolderLevel + 1
     $.ajax({
         type: "post",
-        url: "managerFolderManageController/addFolder",
+        url:target + "managerFolderManageController/addFolder",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -255,7 +255,7 @@ function edit() {
 function refreshfileList(id) {
     $.ajax({
         type: "get",
-        url: "managerFilesManageController/showAllFilesByParentId",
+        url:target + "managerFilesManageController/showAllFilesByParentId",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -336,7 +336,7 @@ function refresh() {
 function editFolder() {
     $.ajax({
         type: "post",
-        url: "managerFolderManageController/updateFolder",
+        url:target + "managerFolderManageController/updateFolder",
         contentType: 'application/x-www-form-urlencoded',
         async: true,
         dataType: "json",
@@ -399,7 +399,7 @@ $("#folderSelected").click(function () {
     if ($("input[class='ck folder']:checked").val() != null) {
         $.ajax({
             type: "get",
-            url: "managerFolderManageController/moveFolder",
+            url:target + "managerFolderManageController/moveFolder",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -424,7 +424,7 @@ $("#folderSelected").click(function () {
     else if ($("input[class='ck file']:checked").val() != null) {
         $.ajax({
             type: "post",
-            url: "managerFilesManageController/updateKnowledgeWithFileId",
+            url:target + "managerFilesManageController/updateKnowledgeWithFileId",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -459,7 +459,7 @@ $('#delete').click(function () {
         alert("选中文件,id为" + $("input[class='ck file']:checked").val());
         $.ajax({
             type: "post",
-            url: "managerFilesManageController/updateKnowledgeWithFileId",
+            url:target + "managerFilesManageController/updateKnowledgeWithFileId",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -485,7 +485,7 @@ $('#delete').click(function () {
         alert("选中文件夹,id为" + $("input[class='ck folder']:checked").val());
         $.ajax({
             type: "post",
-            url: "managerFolderManageController/deleteFolderById",
+            url:target + "managerFolderManageController/deleteFolderById",
             contentType: 'application/x-www-form-urlencoded',
             async: true,
             dataType: "json",
@@ -521,7 +521,7 @@ function realDelete() {
             alert("选中被删除的文件夹");
             $.ajax({
                 type: "post",
-                url: "managerFolderManageController/deleteFolderByIdWithReal",
+                url:target + "managerFolderManageController/deleteFolderByIdWithReal",
                 contentType: 'application/x-www-form-urlencoded',
                 async: true,
                 dataType: "json",
@@ -551,7 +551,7 @@ function realDelete() {
             alert("选中被删除的文件");
             $.ajax({
                 type: "post",
-                url: "managerFilesManageController/deleteKnowledgeWithFileId",
+                url:target + "managerFilesManageController/deleteKnowledgeWithFileId",
                 contentType: 'application/x-www-form-urlencoded',
                 async: true,
                 dataType: "json",
@@ -584,7 +584,7 @@ function resume() {
             alert("选中被删除的文件夹");
             $.ajax({
                 type: "get",
-                url: "managerFolderManageController/recoverFolderByFolderId",
+                url:target + "managerFolderManageController/recoverFolderByFolderId",
                 contentType: 'application/x-www-form-urlencoded',
                 async: true,
                 dataType: "json",
@@ -615,7 +615,7 @@ function resume() {
 
             $.ajax({
                 type: "get",
-                url: "managerFilesManageController/getParentStatus",
+                url:target + "managerFilesManageController/getParentStatus",
                 contentType: 'application/x-www-form-urlencoded',
                 async: true,
                 dataType: "json",
@@ -626,7 +626,7 @@ function resume() {
                     if (!data) {
                         $.ajax({
                             type: "post",
-                            url: "managerFilesManageController/updateKnowledgeWithFileId",
+                            url:target + "managerFilesManageController/updateKnowledgeWithFileId",
                             contentType: 'application/x-www-form-urlencoded',
                             async: true,
                             dataType: "json",

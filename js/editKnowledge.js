@@ -2,7 +2,7 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-18 20:58:48
+ * @Last Modified time: 2018-04-25 22:05:32
  */
 
 
@@ -11,7 +11,7 @@ var E = window.wangEditor;
 var editor = new E('#editor');
 editor.customConfig.zIndex = 100;
 editor.create();
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 var list = [
 	{
 		"id": 18,
@@ -95,7 +95,7 @@ function getTreeSource() {
 
 	$.ajax({
 		type: "get",
-		url: "managerFolderManageController/getAllFolders",
+		url:target + "managerFolderManageController/getAllFolders",
 		data: "",
 		dataType: "json",
 		async: false,
@@ -191,7 +191,7 @@ window.onload = function () {
 	console.log(fileId);
 	$.ajax({
 		type: "get",
-		url: "managerFilesManageController/getFileWithId",
+		url:target + "managerFilesManageController/getFileWithId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: false,
 		dataType: "json",
@@ -253,7 +253,7 @@ $(".btn1").click(function () {
 	console.log(editor.txt.html());
 	$.ajax({
 		type: "post",
-		url: "managerFilesManageController/updateKnowledgeWithFileId",
+		url:target + "managerFilesManageController/updateKnowledgeWithFileId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",

@@ -1,16 +1,19 @@
 /*
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 18:09:56 
- * @Last Modified by:   Liu PengHui 
- * @Last Modified time: 2018-04-10 18:09:56 
+ * @Last Modified by: Liu PengHui
+ * @Last Modified time: 2018-04-25 21:58:48
  */
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
+var jumpTarget = "editKnowledge.html?id=";
 
 window.onload=function(){
-
+	var url = target + "managerFilesManageController/getFileWithId";
+	console.log(GetQueryString("id"));
+	
 	$.ajax({
 		type: "get",
-		url: "managerFilesManageController/getFileWithId",
+		url:target + "managerFilesManageController/getFileWithId",
 		contentType: 'application/x-www-form-urlencoded',
 		async: true,
 		dataType: "json",
@@ -19,11 +22,15 @@ window.onload=function(){
 
 		},
 		success: function (data) {
-			alert(data);
+
 			console.log(data);
-			$("#title").val(data.fileOtherMsg.fileName);//标题
+			$("#title").html(data.fileOtherMsg.fileName);//标题
+			if(data.fileOtherMsg.vip){
+				$("#Viptag").html("VIP知识");
+			}
+			
 			// $("#knowleagebelong").val();//所属知识
-			confimrID=data.fileOtherMsg.folderId;//赋予已选择的文件夹id
+		
 			// $("#").val();//关键词
 			// if (data.fileOtherMsg.fileStatus) {
 			// 	$("input[name='optionsRadiosinline'][value=1]").attr("checked", true);
@@ -32,7 +39,8 @@ window.onload=function(){
 			// 	$("input[name='optionsRadiosinline'][value=0]").attr("checked", true);
 			//  }
 			// $("#").val();//知识简介
-			$("#mainText").val(data.fileTextMsg);//内容
+			$("#time").html(data.fileOtherMsg.buildingTime);
+			$("#mainText").html(data.fileTextMsg);//内容
 		},
 		error: function (data) {
 			console.log(data);

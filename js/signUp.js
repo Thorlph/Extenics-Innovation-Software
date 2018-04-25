@@ -1,3 +1,4 @@
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 $("#signupVali").click(
 
 
@@ -8,7 +9,7 @@ $("#signupVali").click(
             //管理员账户注册
             // $.ajax({
             //     type: "post",
-            //     url: "login/adminlogin",
+            //     url:target +  "login/adminlogin",
             //     contentType: 'application/x-www-form-urlencoded',
             //     dataType: "json",
             //     async: true,
@@ -47,7 +48,7 @@ $("#signupVali").click(
         else if ($("[name='usertype']").filter(":checked").val() == 1) {
             //拉取手机验证码
             $.ajax({
-                url: "user/registerVerPhone",
+                url:target +  "user/registerVerPhone",
                 method: "post",
                 dataType: "json",
                 data: {
@@ -81,7 +82,7 @@ $('#signUp').click(function () {
     else if ($("[name='usertype']").filter(":checked").val() == 1) {
         $.ajax({
             type: "post",
-            url: "user/register",
+            url:target +  "user/register",
             contentType: 'application/x-www-form-urlencoded',
             dataType: "json",
             async: true,

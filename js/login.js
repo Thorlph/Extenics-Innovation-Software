@@ -2,7 +2,7 @@ var username
 var usernameMsg
 var password
 var passwordMsg
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
 window.onload = function () {
     username = document.getElementById("username");
     usernameMsg = document.getElementById("usernameMsg");
@@ -82,7 +82,7 @@ $("#login").click(
         if ($("[name='usertype']").filter(":checked").val() == 0) {
             $.ajax({
                 type: "post",
-                url: "login/adminlogin",
+                url:target + "login/adminlogin",
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: "json",
                 async: true,
@@ -120,7 +120,7 @@ $("#login").click(
         else if($("[name='usertype']").filter(":checked").val() == 1){
             $.ajax({
                 type: "post",
-                url: "login/userlogin",
+                url:target + "login/userlogin",
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: "json",
                 async: true,
