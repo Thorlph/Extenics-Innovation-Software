@@ -2,15 +2,18 @@
  * @Author: Liu PengHui 
  * @Date: 2018-04-10 16:41:15 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-25 22:04:37
+ * @Last Modified time: 2018-04-26 19:05:02
  */
 
 
-
-
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
+var picurl='http://47.101.33.66:8080/extenicsKnowledgeSys/images/upload';
 var E = window.wangEditor;
 var editor = new E('#editor');
+editor.customConfig.uploadImgServer = picurl;
+editor.customConfig.uploadFileName = 'file';
 editor.customConfig.zIndex = 100;
+editor.customConfig.debug = true
 editor.create();
 
 
@@ -18,7 +21,7 @@ editor.create();
 var selectedFolderId;//选中文件夹id
 var selectedFoldeName;//选中文件名
 var confimrID;//确认选择的文件夹id
-var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
+
 
 var list = [
 	{
