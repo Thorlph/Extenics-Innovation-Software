@@ -1,4 +1,4 @@
-var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
+
 $('#getVali').click(function(){
 
 

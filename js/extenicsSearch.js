@@ -1,5 +1,5 @@
-var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
-var jumpTarget = "knowledgePage.html?id=";
+
+
 $('#searchButton').click(function () {
 
     $("#searchButton").attr("disabled", true);

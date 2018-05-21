@@ -2,13 +2,9 @@
  * @Author: Liu PengHui 
  * @Date: 2018-03-29 18:55:47 
  * @Last Modified by: Liu PengHui
- * @Last Modified time: 2018-04-26 19:10:14
+ * @Last Modified time: 2018-05-21 17:32:33
  */
 
-
-
-var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
-var picurl='http://47.101.33.66:8080/extenicsKnowledgeSys/images/upload';
 var E = window.wangEditor;
 var editor = new E('#editor');
 editor.customConfig.uploadImgServer = picurl;

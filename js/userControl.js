@@ -1,10 +1,13 @@
-var target = "http://localhost:8080/esgsmanager/";
+var target1 = "http://localhost:8080/esgsmanager/";
+var target = "http://47.101.33.66:8080/extenicsKnowledgeSys/";
+var picurl='http://47.101.33.66:8080/extenicsKnowledgeSys/images/upload';
+var jumpTarget = "knowledgePage.html?id=";
     //拉取用户信息
 $(document).ready(function () {
     var userId = GetQueryString("id");
     $.ajax({
         type: 'get',
-        url: target+'user/verUserToLogin',
+        url: target1+'user/verUserToLogin',
         contentType: 'application/x-www-form-urlencoded',
         dataType: 'json',
         async: false,
